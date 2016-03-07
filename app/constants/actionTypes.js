@@ -1,0 +1,6 @@
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const SHOW_SPINNER = 'SHOW_SPINNER'
+export const HIDE_SPINNER = 'HIDE_SPINNER'
+export const GET_CONTACTS = 'GET_CONTACTS'
+export const SET_SORT = 'SET_SORT'
