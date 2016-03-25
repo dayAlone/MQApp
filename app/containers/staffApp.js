@@ -85,9 +85,9 @@ const RouteMapper = (props, state, setState) => {
                             'Все',
                             ...USER_TYPES.filter(el => el.length > 0)
                         ],
-                        selectedIndex: 0,
+                        selectedIndex: props.filter,
                         title: 'Тип пользователя',
-                        itemsCallbackSingleChoice: (id, text) => ToastAndroid.show(id + ': ' + text, ToastAndroid.SHORT)
+                        itemsCallbackSingleChoice: (id) => props.contacts.setFilter(id)
                     })
                     dialog.show()
                     break
@@ -97,9 +97,9 @@ const RouteMapper = (props, state, setState) => {
                             'По убыванию',
                             'По возрастанию'
                         ],
-                        selectedIndex: props.sort == -1 ? 0 : 1,
+                        selectedIndex: props.sort === -1 ? 0 : 1,
                         title: 'Тип пользователя',
-                        itemsCallbackSingleChoice: (id, text) => props.contacts.setSort(id == 0 ? -1 : 1)
+                        itemsCallbackSingleChoice: (id) => props.contacts.setSort(id === 0 ? -1 : 1)
                     })
                     dialog.show()
                     break
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
 })
 
 export default connect(
-    state => ({ isLogin: state.login.isLogin, spinner: state.spinner, sort: state.contacts.sort }),
+    state => ({ isLogin: state.login.isLogin, spinner: state.spinner, sort: state.contacts.sort, filter: state.contacts.filter }),
     (dispatch) => ({
         actions: bindActionCreators(loginActions, dispatch),
         contacts: bindActionCreators(contactsActions, dispatch)

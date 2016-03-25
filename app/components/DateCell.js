@@ -1,10 +1,9 @@
-/*global _:true*/
 import moment from 'moment'
 import pluralize from '../libs/pluralize'
 import 'moment/locale/ru'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import 'lodash'
+
 
 import React, {
     Component,
@@ -24,14 +23,11 @@ class DateCell extends Component {
         this.props.navigator.push({
             name: 'contacts',
             date: this.props.date,
-            title: moment(this.props.date, 'DD.MM.YYYY').format('DD MMMM YYYY'),
+            title: moment(this.props.date, 'DD.MM.YYYY').format('D MMMM YYYY'),
         })
     }
     render() {
-        let { date, contacts } = this.props
-        let count = _.filter(contacts, el => {
-            return moment(el.DATE_REGISTER, 'DD.MM.YYYY HH:mm:SS').format('DD.MM.YYYY') === date
-        }).length
+        let { date, contacts, count } = this.props
         let TouchableElement = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableHighlight
         return (
             <TouchableElement
@@ -41,7 +37,7 @@ class DateCell extends Component {
                     <Icon name='folder-shared' size={45} color='rgba(0,0,0,.2)' />
                     <View style={styles.text}>
                         <Text style={styles.title}>
-                            {moment(date, 'DD.MM.YYYY').format('DD MMMM YYYY')}
+                            {moment(date, 'DD.MM.YYYY').format('D MMMM YYYY')}
                         </Text>
                         <Text style={styles.counter}>
                             {count + ' ' + pluralize(count, ['контакт', 'контакта', 'контактов', 'контакта'])}

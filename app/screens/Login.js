@@ -25,6 +25,7 @@ class LoginScreen extends Component {
     componentWillReceiveProps(nextProps) {
         if (!this.props.isLogin && nextProps.isLogin) {
             dismissKeyboard()
+            //.replace
             this.props.navigator.push({
                 name: 'groups'
             })
